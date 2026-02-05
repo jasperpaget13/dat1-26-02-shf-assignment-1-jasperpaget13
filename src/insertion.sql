@@ -1,2 +1,2 @@
 .open fittrackpro.db
-.mode column
+.mode box
