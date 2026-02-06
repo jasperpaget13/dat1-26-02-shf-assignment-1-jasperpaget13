@@ -25,8 +25,8 @@ CREATE TABLE locations (
     CHECK (length(address) >=5),
     phone_number TEXT NOT NULL 
     CHECK (
-        length(replace(phone_number, ' ', '')) = 11
-        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
+        length(phone_number) = 11
+        AND phone_number GLOB '[0-9]*'
     ),
     email TEXT NOT NULL
     CHECK (
@@ -51,8 +51,8 @@ CREATE TABLE members (
     ),
     phone_number TEXT NOT NULL 
     CHECK (
-        length(replace(phone_number, ' ', '')) = 11
-        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
+        length(phone_number) = 11
+        AND phone_number GLOB '[0-9]*'
     ),
     date_of_birth CHECK ( date_of_birth GLOB '[0-9][0-9][0-9][0-9][-][0-9][0-9][-][0-9][0-9]'),
     join_date TEXT
@@ -62,9 +62,9 @@ CREATE TABLE members (
     emergency_contact_name TEXT NOT NULL,
     emergency_contact_phone TEXT NOT NULL 
     CHECK (
-        length(phone_number) BETWEEN 10 AND 15 
+        length(phone_number) = 11
         AND phone_number GLOB '[0-9]*'
-    )
+    ),
 );   
 
 CREATE TABLE staff (
@@ -78,8 +78,8 @@ CREATE TABLE staff (
     ),
     phone_number TEXT NOT NULL 
     CHECK (
-        length(replace(phone_number, ' ', '')) = 11
-        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
+        length(phone_number) = 11
+        AND phone_number GLOB '[0-9]*'
     ),
     position TEXT
     CHECK (position IN ('Manager','Trainer','Receptionist','Maintenance')),
