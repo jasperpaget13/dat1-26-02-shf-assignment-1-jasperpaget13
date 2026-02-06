@@ -50,8 +50,8 @@ CREATE TABLE members (
         AND email LIKE '%_@_%._%'
     ),
     phone_number TEXT NOT NULL 
-    CHECK (
-        length(phone_number) = 11
+    CHECK ( 
+        length(phone_number) BETWEEN 10 AND 15 
         AND phone_number GLOB '[0-9]*'
     ),
     date_of_birth CHECK ( date_of_birth GLOB '[0-9][0-9][0-9][0-9][-][0-9][0-9][-][0-9][0-9]'),
@@ -61,10 +61,10 @@ CREATE TABLE members (
         AND DATE(join_date) IS NOT NULL),
     emergency_contact_name TEXT NOT NULL,
     emergency_contact_phone TEXT NOT NULL 
-    CHECK (
-        length(phone_number) = 11
-        AND phone_number GLOB '[0-9]*'
-    ),
+    CHECK ( 
+        length(emergency_contact_phone) BETWEEN 10 AND 15 
+        AND emergency_contact_phone GLOB '[0-9]*'
+    )
 );   
 
 CREATE TABLE staff (
@@ -77,8 +77,8 @@ CREATE TABLE staff (
         AND email LIKE '%_@_%._%'
     ),
     phone_number TEXT NOT NULL 
-    CHECK (
-        length(phone_number) = 11
+    CHECK ( 
+        length(phone_number) BETWEEN 10 AND 15 
         AND phone_number GLOB '[0-9]*'
     ),
     position TEXT
