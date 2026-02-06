@@ -23,3 +23,9 @@ INSERT INTO staff (staff_id,first_name,last_name,email,phone_number,position,hir
 (2, 'Ivy', 'Irwin', 'ivy.irwin@fittrackpro.com', '07123 456789', 'Trainer', '2023-05-15', 1),
 (3, 'Sarah', 'Connor', 'sarah.connor@fittrackpro.com', '07999 888777', 'Receptionist', '2023-08-01', 1),
 (4, 'Lara', 'Croft', 'lara.croft@fittrackpro.com', '07555 444333', 'Trainer', '2023-09-10', 2);
+
+INSERT INTO equipment (equipment_id,name,type,purchase_date,last_maintenance_date,next_maintenance_date,location_id) VALUES
+(1, 'Treadmill 2000', 'cardio', '2023-01-15', '2024-12-15', '2025-01-15', 1),
+(2, 'Elliptical Trainer', 'cardio', '2023-02-20', '2024-07-20', '2025-02-20', 1),
+(3, 'Smith Machine', 'strength', '2023-03-10', '2024-03-10', '2025-03-10', 1),
+(4, 'Dumbbell Set', 'strength', '2023-04-05', '2024-04-05', '2025-04-05', 2);

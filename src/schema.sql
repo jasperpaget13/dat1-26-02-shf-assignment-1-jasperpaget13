@@ -24,8 +24,8 @@ CREATE TABLE locations (
     address TEXT NOT NULL
     CHECK (length(address) >=5),
     phone_number TEXT NOT NULL 
-    CHECK (
-        length(phone_number) = 11
+    CHECK ( 
+        length(phone_number) BETWEEN 10 AND 15 
         AND phone_number GLOB '[0-9]*'
     ),
     email TEXT NOT NULL
@@ -83,10 +83,34 @@ CREATE TABLE staff (
     ),
     position TEXT
     CHECK (position IN ('Manager','Trainer','Receptionist','Maintenance')),
-    hire_date  TEXT
+    hire_date TEXT
     CHECK (
         hire_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
         AND DATE(hire_date) IS NOT NULL),
+    location_id INTEGER
+    CHECK ( location_id IN (1,2)),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+
+CREATE TABLE equipment (
+    equipment_id CHECK 
+    (equipment_id GLOB '[0-9]') PRIMARY KEY, 
+    name TEXT NOT NULL
+    CHECK ( name IN ('Treadmill 2000','Elliptical Trainer','Smith Machine','Dumbbell Set')),
+    type TEXT NOT NULL 
+    CHECK ( type IN ('cardio','trainer','strength')),
+    purchase_date TEXT
+    CHECK (
+        purchase_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(purchase_date) IS NOT NULL),
+    last_maintenance_date TEXT
+    CHECK (
+        last_maintenance_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(last_maintenance_date) IS NOT NULL),
+    next_maintenance_date TEXT
+    CHECK (
+        next_maintenance_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(next_maintenance_date) IS NOT NULL),
     location_id INTEGER
     CHECK ( location_id IN (1,2)),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
