@@ -25,8 +25,8 @@ CREATE TABLE locations (
     CHECK (length(address) >=5),
     phone_number TEXT NOT NULL 
     CHECK (
-        length(phone_number) BETWEEN 10 AND 15 
-        AND phone_number GLOB '[0-9]*'
+        length(replace(phone_number, ' ', '')) = 11
+        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
     ),
     email TEXT NOT NULL
     CHECK (
@@ -51,8 +51,8 @@ CREATE TABLE members (
     ),
     phone_number TEXT NOT NULL 
     CHECK (
-        length(phone_number) = 11
-        AND phone_number GLOB '[0-9]*'
+        length(replace(phone_number, ' ', '')) = 11
+        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
     ),
     date_of_birth CHECK ( date_of_birth GLOB '[0-9][0-9][0-9][0-9][-][0-9][0-9][-][0-9][0-9]'),
     join_date TEXT
@@ -66,3 +66,28 @@ CREATE TABLE members (
         AND phone_number GLOB '[0-9]*'
     )
 );   
+
+CREATE TABLE staff (
+    staff_id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL
+    CHECK (
+        length(email) BETWEEN 6 AND 254
+        AND email LIKE '%_@_%._%'
+    ),
+    phone_number TEXT NOT NULL 
+    CHECK (
+        length(replace(phone_number, ' ', '')) = 11
+        AND replace(phone_number, ' ', '') GLOB '[0-9]*'
+    ),
+    position TEXT
+    CHECK (position IN ('Manager','Trainer','Receptionist','Maintenance')),
+    hire_date  TEXT
+    CHECK (
+        hire_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(hire_date) IS NOT NULL),
+    location_id INTEGER
+    CHECK ( location_id IN (1,2)),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
