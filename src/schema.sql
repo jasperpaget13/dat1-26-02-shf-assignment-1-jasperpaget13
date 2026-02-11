@@ -129,3 +129,35 @@ CREATE TABLE classes (
     CHECK (location_id IN (1,2)),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
+
+CREATE TABLE class_schedule (
+    schedule_id INTEGER PRIMARY KEY,
+    class_id INTEGER NOT NULL,
+    staff_id INTEGER NOT NULL,
+    start_time TEXT NOT NULL
+    CHECK (start_time GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+    AND DATETIME(start_time) IS NOT NULL),
+    end_time TEXT NOT NULL 
+    CHECK ( end_time GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+    AND DATETIME(end_time) IS NOT NULL),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id),
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+);
+
+CREATE TABLE memberships (
+    membership_id INTEGER NOT NULL PRIMARY KEY,
+    member_id INTEGER NOT NULL,
+    type TEXT NOT NULL
+    CHECK ( type IN ('Standard','Premium')),
+    start_date TEXT
+    CHECK (
+        start_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(start_date) IS NOT NULL),
+    end_date TEXT
+    CHECK (
+        end_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(end_date) NOT NULL),
+    status TEXT
+    CHECK (status IN ('Inactive','Active')),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
