@@ -115,3 +115,17 @@ CREATE TABLE equipment (
     CHECK ( location_id IN (1,2)),
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
+
+CREATE TABLE classes ( 
+    class_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL 
+    CHECK ( name IN ('Spin Class', 'Yoga Basics','HIIT')),
+    description TEXT NOT NULL
+    CHECK ( length(description) BETWEEN 10 AND 255),
+    capacity INTEGER NOT NULL
+    CHECK (capacity BETWEEN 1 AND 30),
+    duration INTEGER NOT NULL,
+    location_id INTEGER NOT NULL
+    CHECK (location_id IN (1,2)),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);

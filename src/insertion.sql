@@ -29,3 +29,8 @@ INSERT INTO equipment (equipment_id,name,type,purchase_date,last_maintenance_dat
 (2, 'Elliptical Trainer', 'cardio', '2023-02-20', '2024-07-20', '2025-02-20', 1),
 (3, 'Smith Machine', 'strength', '2023-03-10', '2024-03-10', '2025-03-10', 1),
 (4, 'Dumbbell Set', 'strength', '2023-04-05', '2024-04-05', '2025-04-05', 2);
+
+INSERT INTO classes (class_id,name,description,capacity,duration,location_id) VALUES 
+(1, 'Spin Class', 'High intensity indoor cycling', 20, 45, 1),
+(2, 'Yoga Basics', 'Beginner level yoga', 15, 60, 1),
+(3, 'HIIT', 'High Interval Intensity Training', 10, 30, 2);
