@@ -161,3 +161,31 @@ CREATE TABLE memberships (
     CHECK (status IN ('Inactive','Active')),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+CREATE TABLE attendance (
+    attendance_id INTEGER PRIMARY KEY,
+    member_id INTEGER NOT NULL,
+    location_id INTEGER NOT NULL
+    CHECK (location_id = 1),
+    check_in_time TEXT NOT NULL
+    CHECK (
+        check_in_time GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+        AND datetime(check_in_time) IS NOT NULL),
+    check_out_time TEXT NOT NULL
+    CHECK (
+        check_out_time GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+        AND datetime(check_out_time) IS NOT NULL),
+    FOREIGN KEY (member_id) REFERENCES members(member_id),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+
+CREATE TABLE class_attendance (
+    class_attendance_id INTEGER PRIMARY KEY
+    CHECK (class_attendance_id BETWEEN 1 AND 15),
+    schedule_id INTEGER NOT NULL,
+    member_id INTEGER NOT NULL,
+    attendance_status TEXT NOT NULL
+    CHECK (attendance_status IN ('Registered','Attended','Unattended')),
+    FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
