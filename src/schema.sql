@@ -189,3 +189,22 @@ CREATE TABLE class_attendance (
     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+CREATE TABLE payments (
+payment_id INTEGER PRIMARY KEY,
+member_id INTEGER NOT NULL
+CHECK (member_id BETWEEN 1 AND 11),
+amount TEXT NOT NULL
+CHECK (amount GLOB '[0-9][0-9]*.[0-9][0-9]'),
+payment_date TEXT NOT NULL
+CHECK (
+    payment_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+    AND datetime(payment_date) IS NOT NULL),
+payment_method TEXT NOT NULL
+CHECK (
+    payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal', 'Cash')),
+payment_type TEXT NOT NULL
+CHECK ( 
+    payment_type IN ('Monthly membership fee', 'Day pass')),
+FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
