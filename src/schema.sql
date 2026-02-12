@@ -191,20 +191,41 @@ CREATE TABLE class_attendance (
 );
 
 CREATE TABLE payments (
-payment_id INTEGER PRIMARY KEY,
-member_id INTEGER NOT NULL
-CHECK (member_id BETWEEN 1 AND 11),
-amount TEXT NOT NULL
-CHECK (amount GLOB '[0-9][0-9]*.[0-9][0-9]'),
-payment_date TEXT NOT NULL
-CHECK (
-    payment_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
-    AND datetime(payment_date) IS NOT NULL),
-payment_method TEXT NOT NULL
-CHECK (
-    payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal', 'Cash')),
-payment_type TEXT NOT NULL
-CHECK ( 
-    payment_type IN ('Monthly membership fee', 'Day pass')),
-FOREIGN KEY (member_id) REFERENCES members(member_id)
+    payment_id INTEGER PRIMARY KEY,
+    member_id INTEGER NOT NULL
+    CHECK (member_id BETWEEN 1 AND 11),
+    amount TEXT NOT NULL
+    CHECK (amount GLOB '[0-9][0-9]*.[0-9][0-9]'),
+    payment_date TEXT NOT NULL
+    CHECK (
+        payment_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]'
+        AND datetime(payment_date) IS NOT NULL),
+    payment_method TEXT NOT NULL
+    CHECK (
+        payment_method IN ('Credit Card', 'Bank Transfer', 'PayPal', 'Cash')),
+    payment_type TEXT NOT NULL
+    CHECK ( 
+        payment_type IN ('Monthly membership fee', 'Day pass')),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+);
+
+CREATE TABLE personal_training_sessions (
+    session_id INTEGER PRIMARY KEY,
+    member_id INTEGER NOT NULL,
+    staff_id INTEGER NOT NULL,
+    session_date TEXT
+    CHECK (
+        session_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(session_date) IS NOT NULL), 
+    start_time TEXT NOT NULL
+        CHECK (
+            start_time GLOB '[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
+    end_time TEXT NOT NULL
+        CHECK (
+            end_time GLOB '[0-2][0-9]:[0-5][0-9]:[0-5][0-9]'),
+    notes TEXT
+    CHECK (
+        notes IN ('Cardio focus','Strength training','Form check')),
+    FOREIGN KEY (member_id) REFERENCES members(member_id),
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
