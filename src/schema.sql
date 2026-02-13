@@ -229,3 +229,21 @@ CREATE TABLE personal_training_sessions (
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
+
+CREATE TABLE member_health_metrics (
+    metric_id INTEGER PRIMARY KEY,
+    member_id INTEGER NOT NULL,
+    measurement_date TEXT NOT NULL
+    CHECK (
+        measurement_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(measurement_date) IS NOT NULL),
+    weight TEXT NOT NULL
+    CHECK  (weight GLOB '[0-9][0-9]*.[0-9]'),
+    body_fat_percentage TEXT NOT NULL
+    CHECK (body_fat_percentage GLOB '[0-9][0-9]*.[0-9]'),
+    muscle_mass TEXT NOT NULL
+    CHECK (muscle_mass GLOB '[0-9][0-9]*.[0-9]'),
+    bmi TEXT NOT NULL
+    CHECK (bmi GLOB '[0-9][0-9]*.[0-9]'),
+    FOREIGN KEY (member_id) REFERENCES members(member_id)
+);

@@ -77,3 +77,7 @@ INSERT INTO personal_training_sessions (session_id,member_id,staff_id,session_da
 (1, 1, 2, '2025-01-25', '09:00:00', '10:00:00', 'Cardio focus'),
 (2, 3, 2, '2025-01-28', '14:00:00', '15:00:00', 'Strength training'),
 (3, 5, 2, '2025-02-04', '10:00:00', '11:00:00', 'Form check');
+
+INSERT INTO member_health_metrics (metric_id,member_id,measurement_date,weight,body_fat_percentage,muscle_mass,bmi) VALUES
+(1, 5, '2025-01-10', '65.0', '22.5', '48.0', '24.1'),
+(2, 3, '2025-01-15', '80.0', '18.0', '60.0', '25.5');
