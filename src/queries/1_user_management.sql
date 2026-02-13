@@ -43,4 +43,8 @@ ORDER BY registration_count ASC
 LIMIT 1;
 
 -- 1.6
-
+SELECT COUNT(DISTINCT member_id) AS members_with_2_or_more_attendances
+FROM class_attendance
+WHERE attendance_status = 'Attended'
+GROUP BY member_id
+HAVING COUNT(*) >= 2;
