@@ -247,3 +247,18 @@ CREATE TABLE member_health_metrics (
     CHECK (bmi GLOB '[0-9][0-9]*.[0-9]'),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+CREATE TABLE equipment_maintenance_log (
+    log_id INTEGER PRIMARY KEY,
+    equipment_id INTEGER NOT NULL,
+    maintenance_date TEXT
+    CHECK (
+        maintenance_date GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'
+        AND DATE(maintenance_date) IS NOT NULL),
+    description TEXT NOT NULL
+    CHECK (
+        description IN ('Belt replacement','Oiling and sensor check','Safety bar adjustment')
+    ),
+    staff_id INTEGER NOT NULL,
+    FOREIGN KEY (equipment_id) REFERENCES equipment(equipment_id)
+);
