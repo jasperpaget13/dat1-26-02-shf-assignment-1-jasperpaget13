@@ -38,10 +38,34 @@ AND DATE(class_schedule.start_time) = '2025-02-01';
 
 
 -- 4.4 
-
+DELETE FROM class_attendance
+WHERE member_id = 3
+AND schedule_id = 7;
 
 -- 4.5 
+SELECT 
+    classes.class_id,
+    classes.name AS class_name,
+    COUNT(class_attendance.class_attendance_id) AS registration_count
+FROM classes
+JOIN class_schedule
+    ON classes.class_id = class_schedule.class_id
+JOIN class_attendance
+    ON class_schedule.schedule_id = class_attendance.schedule_id
+WHERE class_attendance.attendance_status = 'Registered'
+GROUP BY classes.class_id
+ORDER BY registration_count DESC
+LIMIT 1;
 
 
 -- 4.6 
-
+SELECT 
+    AVG(class_count) AS average_classes_per_member
+FROM (
+    SELECT 
+        member_id,
+        COUNT(*) AS class_count
+    FROM class_attendance
+    WHERE attendance_status IN ('Registered', 'Attended')
+    GROUP BY member_id
+);
