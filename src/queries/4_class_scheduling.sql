@@ -30,6 +30,11 @@ GROUP BY class_schedule.schedule_id
 ORDER BY class_schedule.start_time;
 
 -- 4.3 
+INSERT INTO class_attendance (schedule_id, member_id, attendance_status)
+SELECT class_schedule.schedule_id, 11, 'Registered'
+FROM class_schedule
+WHERE class_schedule.class_id = 1
+AND DATE(class_schedule.start_time) = '2025-02-01';
 
 
 -- 4.4 

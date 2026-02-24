@@ -180,12 +180,11 @@ CREATE TABLE attendance (
 );
 
 CREATE TABLE class_attendance (
-    class_attendance_id INTEGER PRIMARY KEY
-    CHECK (class_attendance_id BETWEEN 1 AND 15),
+    class_attendance_id INTEGER PRIMARY KEY,
     schedule_id INTEGER NOT NULL,
     member_id INTEGER NOT NULL,
     attendance_status TEXT NOT NULL
-    CHECK (attendance_status IN ('Registered','Attended','Unattended')),
+        CHECK (attendance_status IN ('Registered','Attended','Unattended')),
     FOREIGN KEY (schedule_id) REFERENCES class_schedule(schedule_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );

@@ -371,14 +371,7 @@ class_id | class_name | instructor_name
 
 ---
 
-#### 4.2. Find available classes for a specific date
-
-**Task**: List classes available on '2025-02-01'
-
-**Output**: A result set with columns:
-
-```plaintext
-class_id | name | start_time | end_time | available_spots
+ 
 ```
 
 ---
