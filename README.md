@@ -418,7 +418,7 @@ class_id | class_name | registration_count
 ### 5. Membership Management (membership_management.sql)
 
 #### 5.1. List all active memberships with member details
-
+    
 **Task**: List all active memberships
 
 **Output**: A result set with columns:
