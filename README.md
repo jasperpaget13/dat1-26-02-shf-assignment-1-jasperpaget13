@@ -441,14 +441,7 @@ membership_type | avg_visit_duration_minutes
 
 ---
 
-#### 5.3. Identify members with expiring memberships in 2025
- 
- **Task**: List members whose memberships will expire in 2025
-
-**Output**: A result set with columns:
-
-```plaintext
-member_id | first_name | last_name | email | end_date
+  
 ```
 
 ### 6. Attendance Tracking (attendance_tracking.sql)
