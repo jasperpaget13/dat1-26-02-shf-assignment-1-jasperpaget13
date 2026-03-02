@@ -3,7 +3,7 @@
 
 -- 5.1 
 -- INNER JOIN ensures only members with membership records are included.
--- Selecting join_date alongside membership type provides context for membership duration.
+-- Selecting join_date with membership type provides context for membership duration.
 SELECT 
     members.member_id,
     members.first_name,
@@ -30,8 +30,8 @@ JOIN memberships
 GROUP BY memberships.type;
 
 -- 5.3 
--- strftime('%Y', ...) extracts the year from a date stored as text in SQLite.
--- Filtering by year allows identification of memberships ending within a specific calendar year.
+-- strftime('%Y',) extracts the year from a date stored as text
+-- Filtering by year allowsme to identfy memberships ending within a specific calendar year.
 SELECT 
     members.member_id,
     members.first_name,

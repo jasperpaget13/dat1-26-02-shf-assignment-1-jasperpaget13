@@ -24,7 +24,7 @@ FROM equipment
 GROUP BY type;
 
 -- 3.3 
--- julianday() is used because SQLite stores dates as text and requires conversion for calculations.
+-- julianday() is used because SQLite stores dates as text and you need to convert it for calculations.
 SELECT 
     type,
     AVG(julianday('now') - julianday(purchase_date)) AS avg_age_days

@@ -2,12 +2,12 @@
 .mode box
 
 -- 6.1 
--- NULL is used for check_out_time to represent an active visit that has not yet ended.
+-- NULL is used for check_out_time to represent an active visit that hasn't ended.
 INSERT INTO attendance (member_id, location_id, check_in_time, check_out_time)
 VALUES (7, 1, '2025-02-14 16:30:00', NULL);
 
 -- 6.2
--- DATE() extracts only the date portion for clearer reporting while retaining full timestamps.
+-- DATE() extracts only the date portion for clearer reporting while keeping the full timestamps.
 SELECT 
     DATE(check_in_time) AS visit_date,
     check_in_time,
@@ -17,7 +17,7 @@ WHERE member_id = 5
 ORDER BY check_in_time;
 
 -- 6.3 
--- strftime('%w', ...) derives the day of week from a datetime value
+-- strftime('%w') gets the day of week from a datetime value
 -- ORDER BY DESC with LIMIT 1 efficiently identifies the most common visit day.
 SELECT 
     strftime('%w', check_in_time) AS day_of_week,

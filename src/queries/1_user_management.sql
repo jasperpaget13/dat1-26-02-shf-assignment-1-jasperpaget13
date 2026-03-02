@@ -3,7 +3,7 @@
 
 -- 1.1
 -- Retrieve key member details from the members table.
--- Only necessary columns are selected to avoid unnecessary data retrieval and improve query clarity.
+-- Only necessary columns are selected to avoid unnecessary data and improve query clarity.
 SELECT
 member_id,
 first_name,
