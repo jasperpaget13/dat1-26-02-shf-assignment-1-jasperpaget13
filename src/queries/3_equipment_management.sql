@@ -2,6 +2,9 @@
 .mode column
 
 -- 3.1 
+-- A date range is used instead of BETWEEN to create a precise 30-day window.
+-- SQLite’s date() function ensures a proper date without manual calculation.
+-- Ordering by date makes the upcoming maintenance schedule easier to read.
 SELECT 
     equipment_id,
     name,
@@ -12,6 +15,8 @@ WHERE next_maintenance_date >= '2025-01-01'
 ORDER BY next_maintenance_date;
 
 -- 3.2 
+-- GROUP BY is used to aggregate equipment by type.
+-- Renaming the column improves readability of the output.
 SELECT 
     type AS equipment_type,
     COUNT(*) AS count
@@ -19,6 +24,7 @@ FROM equipment
 GROUP BY type;
 
 -- 3.3 
+-- julianday() is used because SQLite stores dates as text and requires conversion for calculations.
 SELECT 
     type,
     AVG(julianday('now') - julianday(purchase_date)) AS avg_age_days

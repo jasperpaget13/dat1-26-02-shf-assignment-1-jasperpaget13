@@ -2,6 +2,8 @@
 .mode box
 
 -- 7.1 
+-- Ordering by position groups staff by role, improving readability and clarity.
+-- Renaming position to role makes the output more user-friendly without changing the schema.
 SELECT 
     staff_id,
     first_name,
@@ -11,6 +13,8 @@ FROM staff
 ORDER BY position;
 
 -- 7.2 
+-- The date range limits results to a specific 30-day period using the DATE() function.
+-- INNER JOIN ensures only trainers with recorded sessions are counted
 SELECT 
     staff.staff_id AS trainer_id,
     staff.first_name || ' ' || staff.last_name AS trainer_name,

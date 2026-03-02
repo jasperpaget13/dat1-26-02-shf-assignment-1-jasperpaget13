@@ -2,10 +2,12 @@
 .mode box
 
 -- 6.1 
+-- NULL is used for check_out_time to represent an active visit that has not yet ended.
 INSERT INTO attendance (member_id, location_id, check_in_time, check_out_time)
 VALUES (7, 1, '2025-02-14 16:30:00', NULL);
 
--- 6.2 
+-- 6.2
+-- DATE() extracts only the date portion for clearer reporting while retaining full timestamps.
 SELECT 
     DATE(check_in_time) AS visit_date,
     check_in_time,
@@ -15,6 +17,8 @@ WHERE member_id = 5
 ORDER BY check_in_time;
 
 -- 6.3 
+-- strftime('%w', ...) derives the day of week from a datetime value
+-- ORDER BY DESC with LIMIT 1 efficiently identifies the most common visit day.
 SELECT 
     strftime('%w', check_in_time) AS day_of_week,
     COUNT(*) AS visit_count
@@ -24,6 +28,8 @@ ORDER BY visit_count DESC
 LIMIT 1;
 
 -- 6.4 
+-- A subquery calculates daily attendance per location before averaging.
+-- GROUP BY location ensures each location’s average is calculated independently.
 SELECT 
     locations.name AS location_name,
     AVG(daily_count) AS avg_daily_attendance

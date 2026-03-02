@@ -2,6 +2,8 @@
 .mode box
 
 -- 5.1 
+-- INNER JOIN ensures only members with membership records are included.
+-- Selecting join_date alongside membership type provides context for membership duration.
 SELECT 
     members.member_id,
     members.first_name,
@@ -14,6 +16,8 @@ JOIN memberships
 WHERE memberships.status = 'Active';
 
 -- 5.2 
+-- julianday() is required in SQLite to calculate time differences from datetime values.
+-- Multiplying by 24 * 60 converts the difference from days into minutes.
 SELECT 
     memberships.type AS membership_type,
     AVG(
@@ -26,6 +30,8 @@ JOIN memberships
 GROUP BY memberships.type;
 
 -- 5.3 
+-- strftime('%Y', ...) extracts the year from a date stored as text in SQLite.
+-- Filtering by year allows identification of memberships ending within a specific calendar year.
 SELECT 
     members.member_id,
     members.first_name,
