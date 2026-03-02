@@ -7,7 +7,7 @@ VALUES (11, 50.00, DATETIME('now'), 'Credit Card', 'Monthly membership fee');
 
 -- 2.2 
 -- Use strftime('%Y-%m') to extract year and month from payment_date
--- Filter only membership fee payments with BETWEEN for the specified 4-month period
+-- Filter only membership fee payments with BETWEEN for the specified 4-month period.
 SELECT 
     strftime('%Y-%m', payment_date) AS month,
     SUM(amount) AS total_revenue
